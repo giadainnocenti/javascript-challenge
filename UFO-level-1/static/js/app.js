@@ -21,6 +21,8 @@ function runEnter() {
     console.log(inputvalue);
     console.log(data);
 
+    var filterData = data.filter(data => data.datetime === inputValue);
 
+    console.log(filterData)
 }
-// YOUR CODE HERE!
+
