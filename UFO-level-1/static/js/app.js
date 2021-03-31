@@ -1,9 +1,12 @@
 // from data.js
 var tableData = data;
+//Showing all the possible dates unfiltered
+UpdateTable(tableData)
+
 //select the button
-var button = d3.select("#button");
+var button = d3.select("#filter-btn");
 //select the form
-var form = d3.select("#form");
+var form = d3.select(".form-control");
 
 //create event handlers
 button.on("click", runEnter);
@@ -17,12 +20,37 @@ function runEnter() {
     var inputElement = d3.select("#datetime");
     //get the value property of the input element
     var inputValue = inputElement.property("value");
-
-    console.log(inputvalue);
+    //writing on the console the input value
+    console.log(inputValue);
+    //writing on the console the whole dataset
     console.log(data);
 
-    var filterData = data.filter(data => data.datetime === inputValue);
+    //filtering the dataset with respect to the input
+    var filterData = tableData.filter(data => data.datetime === inputValue);
+    // writing the filtered data on the console
+    console.log(filterData);
+    //writing the filtered data on the online table
+    UpdateTable(filterData);
+    
+    return filterData
+};
 
-    console.log(filterData)
-}
 
+function UpdateTable(array){
+    //select the body of the table
+    var tbody = d3.select("tbody");
+
+    // clear the that may already be in the table.
+	tbody.text("");
+    //if the filtered data do not contain elements print an empty table
+    if (array === null)
+        return;
+    //printing all the rows in tbody
+    array.forEach((array) => {
+        var row = tbody.append("tr");
+        Object.entries(array).forEach(([key, value]) => {
+        var cell = row.append("td");
+        cell.text(value);
+        });
+    });
+};
