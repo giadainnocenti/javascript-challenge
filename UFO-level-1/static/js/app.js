@@ -1,5 +1,7 @@
 // from data.js
 var tableData = data;
+//writing on the console the whole dataset
+console.log(data);
 //Showing all the possible dates unfiltered
 UpdateTable(tableData)
 
@@ -22,8 +24,7 @@ function runEnter() {
     var inputValue = inputElement.property("value");
     //writing on the console the input value
     console.log(inputValue);
-    //writing on the console the whole dataset
-    console.log(data);
+    
 
     //filtering the dataset with respect to the input
     var filterData = tableData.filter(data => data.datetime === inputValue);
@@ -41,7 +42,7 @@ function UpdateTable(array){
     var tbody = d3.select("tbody");
 
     // clear the that may already be in the table.
-	tbody.text("");
+	tbody.html("");
     //if the filtered data do not contain elements print an empty table
     if (array === null)
         return;
@@ -50,7 +51,7 @@ function UpdateTable(array){
         var row = tbody.append("tr");
         Object.entries(array).forEach(([key, value]) => {
         var cell = row.append("td");
-        cell.text(value);
+        cell.html(value);
         });
     });
 };
